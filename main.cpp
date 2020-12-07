@@ -2,6 +2,7 @@
 #include <vector>
 #include <string>
 #include <cctype>
+
 #include "Courses.h"
 #include "Student.h"
 using namespace std;
@@ -15,7 +16,7 @@ int main() {
 	int foundIndex;
 	char menuInput;
 
-	std::cout << "DATABASE MENU\n";
+	std::cout << "\n\nDATABASE MENU\n";
 	std::cout << "A - Add Student\n";
 	std::cout << "C - Add Additional Course for Student\n";
 	std::cout << "I - Print Student Info\n";
@@ -42,169 +43,154 @@ int main() {
 
 			// now do a switch case to bring up the proper functionA
 			switch (menuInput) {
-        case 'A': // user has decided to add a user
-        case 'a':
-          currentStudent.AddStudent(Students);
-          std::cout << "Student ID is: " << Students.back().getStudentID() << endl;
-          break;
-        case 'C':
-        case 'c':
-          std::cout << "Enter student ID: \n";
-				while (!(cin >> idInput)) {
-					cout << "A number was not entered. Please enter an id:" << endl;
-					cin.clear();
-					cin.ignore(123, '\n');
-					cin >> idInput;
+				case 'A': // user has decided to add a user
+				case 'a':
+					currentStudent.AddStudent(Students);
+					std::cout << "Student ID is: " << Students.back().getStudentID() << endl;
 					break;
-				}
-
-				// now look for the name in the student roster
-				for (int ii = 0; ii < Students.size(); ++ii) {
-					if (Students.at(ii).getStudentID() == idInput) {
-						studentFound = true;
-						foundIndex = ii;
+				case 'C':
+				case 'c':
+					std::cout << "Enter student ID: \n";
+					while (!(cin >> idInput)) {
+						cout << "A number was not entered. Please enter an id:" << endl;
+						cin.clear();
+						cin.ignore(123, '\n');
+						cin >> idInput;
+						break;
 					}
 
-				}
-
-				if (studentFound == true) {
-					std::cout << "Student was found.\n";
-					currentStudent.AdditionalCourse(Students.at(foundIndex));
-				}
-				else {
-					std::cout << "Student was not found\n";
-				}
-
-				break;
-
-			case 'G':
-			case 'g':
-				cout << "Enter Student ID:\n";
-				while (!(cin >> idInput))
-				{
-					cout << "A number was not entered. Please enter an id:" << endl;
-					cin.clear();
-					cin.ignore(123, '\n');
-					cin >> idInput;
-					break;
-				}
-
-				// now look for the name in the student roster
-				for (int ii = 0; ii < Students.size(); ++ii)
-				{
-					if (Students.at(ii).getStudentID() == idInput)
-					{
-						studentFound = true;
-						foundIndex = ii;
+					// now look for the name in the student roster
+					for (int ii = 0; ii < Students.size(); ++ii) {
+						if (Students.at(ii).getStudentID() == idInput) {
+							studentFound = true;
+							foundIndex = ii;
+						}
 					}
 
-				}
-
-				if (studentFound == true)
-				{
-					std::cout << "Student was found.\n";
-					currentStudent.CalculateGPA(Students.at(foundIndex));
-					std::cout << "GPA is " <<
-						Students.at(foundIndex).GetOverallGPA() << endl;
-				}
-				else
-				{
-					std::cout << "Student was not found\n";
-				}
-
-				break;
-
-			case 'I':
-			case 'i':
-				std::cout << "Enter the student ID whose info you wish to see.\n";
-
-				while (!(cin >> idInput))
-				{
-					cout << "A number was not entered. Please enter an id:" << endl;
-					cin.clear();
-					cin.ignore(123, '\n');
-					cin >> idInput;
-					break;
-				}
-
-				// now look for the name in the student roster
-				for (int ii = 0; ii < Students.size(); ++ii)
-				{
-					if (Students.at(ii).getStudentID() == idInput)
-					{
-						studentFound = true;
-						foundIndex = ii;
+					if (studentFound == true) {
+						std::cout << "Student was found.\n";
+						currentStudent.AdditionalCourse(Students.at(foundIndex));
+					} else {
+						std::cout << "Student was not found\n";
 					}
 
-				}
-
-				if (studentFound == true) {
-					std::cout << "Student was found.\n";
-					// calculate GPA; to be used in the info page
-					currentStudent.CalculateGPA(Students.at(foundIndex));
-					currentStudent.PrintStudentCompleteInfo(Students.at(foundIndex));
-				}
-				else {
-					std::cout << "Student was not found\n";
-				}
-				break;
-
-			case 'M':
-			case 'm':
-				cin.ignore();
-				std::cout << "Enter the id you wish to modify:\n";
-				while (!(cin >> idInput)) {
-					cout << "A number was not entered. Please enter an id:" << endl;
-					cin.clear();
-					cin.ignore(123, '\n');
-					cin >> idInput;
 					break;
-				}
 
-				currentStudent.Modify(idInput, Students);
-				break;
-
-			case 'P':
-			case 'p':
-				currentStudent.PrintRoster(Students);
-				break;
-
-			case 'R':
-			case 'r':
-				currentStudent.RemoveStudent(Students);
-				break;
-
-			case 'H':
-			case 'h':
-				cin.ignore();
-				cout << "Enter the id you wish to view their honors:\n";
-
-				while (!(cin >> idInput)) {
-					cout << "A number was not entered. Please enter an id:" << endl;
-					cin.clear();
-					cin.ignore(123, '\n');
-					cin >> idInput;
-					break;
-				}
-				// now look for the name in the student roster
-				for (int ii = 0; ii < Students.size(); ++ii) {
-					if (Students.at(ii).getStudentID() == idInput) {
-						studentFound = true;
-						foundIndex = ii;
+				case 'G':
+				case 'g':
+					cout << "Enter Student ID:\n";
+					while (!(cin >> idInput)) {
+						cout << "A number was not entered. Please enter an id:" << endl;
+						cin.clear();
+						cin.ignore(123, '\n');
+						cin >> idInput;
+						break;
 					}
 
-				}
+					// now look for the name in the student roster
+					for (int ii = 0; ii < Students.size(); ++ii) {
+						if (Students.at(ii).getStudentID() == idInput) {
+							studentFound = true;
+							foundIndex = ii;
+						}
 
-				if (studentFound == true)	{
-					cout << "Student was found.\n";
-					// calculate GPA; to be used in the info page
-					currentStudent.CalculateGPA(Students.at(foundIndex));
-					currentStudent.PrintHonors(Students.at(foundIndex));
-				}
-				else {
-					cout << "Student was not found\n";
-				}
-				break;
+					}
+
+					if (studentFound == true) {
+						std::cout << "Student was found.\n";
+						currentStudent.CalculateGPA(Students.at(foundIndex));
+						std::cout << "GPA is " <<
+							Students.at(foundIndex).GetOverallGPA() << endl;
+					} else {
+						std::cout << "Student was not found\n";
+					}
+
+					break;
+
+				case 'I':
+				case 'i':
+					std::cout << "Enter the student ID whose info you wish to see.\n";
+
+					while (!(cin >> idInput)) {
+						cout << "A number was not entered. Please enter an id:" << endl;
+						cin.clear();
+						cin.ignore(123, '\n');
+						cin >> idInput;
+						break;
+					}
+
+					// now look for the name in the student roster
+					for (int ii = 0; ii < Students.size(); ++ii) {
+						if (Students.at(ii).getStudentID() == idInput) {
+							studentFound = true;
+							foundIndex = ii;
+						}
+					}
+
+					if (studentFound == true) {
+						std::cout << "Student was found.\n";
+						// calculate GPA; to be used in the info page
+						currentStudent.CalculateGPA(Students.at(foundIndex));
+						currentStudent.PrintStudentCompleteInfo(Students.at(foundIndex));
+					} else {
+						std::cout << "Student was not found\n";
+					}
+
+					break;
+
+				case 'M':
+				case 'm':
+					cin.ignore();
+					std::cout << "Enter the id you wish to modify:\n";
+					while (!(cin >> idInput)) {
+						cout << "A number was not entered. Please enter an id:" << endl;
+						cin.clear();
+						cin.ignore(123, '\n');
+						cin >> idInput;
+						break;
+					}
+					currentStudent.Modify(idInput, Students);
+					break;
+
+				case 'P':
+				case 'p':
+					currentStudent.PrintRoster(Students);
+					break;
+
+				case 'R':
+				case 'r':
+					currentStudent.RemoveStudent(Students);
+					break;
+
+				case 'H':
+				case 'h':
+					cin.ignore();
+					cout << "Enter the id you wish to view their honors:\n";
+					while (!(cin >> idInput)) {
+						cout << "A number was not entered. Please enter an id:" << endl;
+						cin.clear();
+						cin.ignore(123, '\n');
+						cin >> idInput;
+						break;
+					}
+
+					// now look for the name in the student roster
+					for (int ii = 0; ii < Students.size(); ++ii) {
+						if (Students.at(ii).getStudentID() == idInput) {
+							studentFound = true;
+							foundIndex = ii;
+						}
+					}
+
+					if (studentFound == true) {
+						cout << "Student was found.\n";
+						// calculate GPA; to be used in the info page
+						currentStudent.CalculateGPA(Students.at(foundIndex));
+						currentStudent.PrintHonors(Students.at(foundIndex));
+					} else {
+						cout << "Student was not found\n";
+					}
+					break;
 			}
 
 			cout << "DATABASE MENU\n";

@@ -7,27 +7,22 @@
 #include "Courses.h"
 using namespace std;
 
-// ******************** Class Constructors ********************
-
-// Default constructor for Student object. Sets default values 
+// Default constructor for Student object
 Student::Student() {
 	this->name = "empty";
 	this->age = 00;
 	this->studentID = rand();
 }
 
-// Overloaded constructor: @Parameters student name and age
+// Overloaded constructor: @Parameters name and age
 Student::Student(string name, int age) {
-  // Note: Student ID is generated randomly once class is instantiated 
 	this->name = name;
 	this->age = age;
-	this->studentID = rand(); 
+	this->studentID = rand(); // Student ID is generated randomly once class is instantiated 
 	this->overallGPA = 0.0;
 }
 
-// ******************** Setter and Getters ********************
-
-// Sets the student's name
+// Sets the student's name @Parameter string name
 void Student::setName(string name) {
 	this->name = name;
 }
@@ -37,36 +32,34 @@ string Student::getName() {
 	return this->name;
 }
 
-// Retrives the student's age 
+// Retrives student's age 
 int Student::getAge() {
 	return this->age;
 }
 
-// Sets the student's age @Parameter student age
+// Sets student's age @Parameter int student age
 void Student::setAge(int age) {
 	this->age = age;
 }
 
-// Retrives the student's ID 
+// Retrives student's ID 
 int Student::getStudentID() {
 	return this->studentID;
 }
 
-// Sets the student gpa @Paramter student gpa
+// Sets the student gpa @Paramter double student gpa 
 void Student::setGPA(double gpa) //TODO: Change the method name 
 {
 	this->overallGPA = gpa;
 }
 
-// Retrives the student's overall GPA 
+// Retrives student's overall GPA 
 double Student::GetOverallGPA()
 {
 	return overallGPA;
 }
 
-// ******************** CRUD Functions ********************
-
-// Adds a student to the roster 
+// Adds a student to the roster @Patameter vector(pointer) of Student objects 
 void Student::AddStudent(vector<Student>& students) {
 	string newName;
 	int newAge;
@@ -83,14 +76,14 @@ void Student::AddStudent(vector<Student>& students) {
 	students.push_back(Student(newName, newAge));
 }
 
-// Adds a course in a student's list of courses
+// Adds a course in a student's list of courses @Patameter vector(pointer) of Student objects 
 void Student::AdditionalCourse(Student& studentInput) {
 	Courses coursePlaceHolder;
 	coursePlaceHolder.AddCourse();
 	studentInput.studentListOfCourses.push_back(coursePlaceHolder);
 }
 
-// Prints out a student's information and their list of courses
+// Prints out a student's information and their list of courses @Patameter Student obejct 
 void Student::PrintStudentCompleteInfo(Student studentInput) {
 	cout << endl << endl;
 	cout << setw(30) << right << "[ Student ID: " << studentInput.getStudentID() << " ]" << endl;
@@ -108,6 +101,7 @@ void Student::PrintStudentCompleteInfo(Student studentInput) {
 		cout << endl;
 	} else {
 		// If the courses isn't empty, it will print it out
+		// Do a header row
 		cout << "Course Name\t\t" << "CRN\t\t" << "Teacher Name\t\t" << "Units\t\t" << "Class Grade\n\n";
 		for (int ii = 0; ii < studentInput.studentListOfCourses.size(); ++ii) {
 			cout << studentInput.studentListOfCourses.at(ii).GetCourseName() << "\t\t";
@@ -119,12 +113,12 @@ void Student::PrintStudentCompleteInfo(Student studentInput) {
 		}
 	}
 	cout << endl << endl;
-	// Calculates the GPA
+	// Calculate the GPA
 	cout << setw(30) << right <<
 		"Student GPA is: " << studentInput.GetOverallGPA() << endl;
 }
 
-// Prints a roster of all the students @vector student
+// Prints a roster of all the students @vector student @Patameter vector of Student objects 
 void Student::PrintRoster(vector<Student> student) {
 	cout << "Complete roster:\n";
 
@@ -139,7 +133,7 @@ void Student::PrintRoster(vector<Student> student) {
 // Calculates student's gpa @Parameter Student object pointer
 void Student::CalculateGPA(Student& studentInput) {
 	studentInput.setGPA(50.5);
-	// Create a placeholder for the grade points
+	// First create a placeholder for the grade points
 	double gradePoints = 0.0;
 	// Number of total units
 	double numOfTotalUnits = 0.0;
@@ -178,7 +172,7 @@ void Student::CalculateGPA(Student& studentInput) {
 	}
 }
 
-// Removes a student from the roster
+// Removes a student from the roster @Patameter vector(pointer) of Student objects 
 void Student::RemoveStudent(vector<Student>& students) {
 	int key;
 
@@ -199,9 +193,9 @@ void Student::RemoveStudent(vector<Student>& students) {
 	cout << "Returning to main menu\n";
 }
 
-// Modifies a student's name and age
+// Modifies a student's name and age @Patameter vector(pointer) of Student objects and int for key
 void Student::Modify(int key, vector<Student>& rosterInput) {
-	// Linear search algorithm 
+	// linear search algorithm 
 	cin.ignore();
 	for (int i = 0; i < rosterInput.size(); i++) {
 		if (rosterInput.at(i).getStudentID() == key) {
@@ -222,9 +216,8 @@ void Student::Modify(int key, vector<Student>& rosterInput) {
 
 
 
-// Prints out what awards a student has based on their overall gpa
+// Prints out what awards a student has based on their overall gpa @Patameter Student object pointer
 void Student::PrintHonors(Student& studentInput) {
-
 	cout << "\nHonors:" << endl;
 
 	if (studentInput.GetOverallGPA() == 4.0) {		//if student has a 4.0 gpa
